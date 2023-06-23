@@ -1,0 +1,20 @@
+.wrapper {
+  padding: 24px;
+  background-image:url('image.jpg');
+  background-size: cover;
+}
+  .mainTitle {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    margin-left: 24px;
+    color: #1D1E55;
+  }
+
+  .title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    margin-left: 24px;
+    color: #1D1E55;
+  }
