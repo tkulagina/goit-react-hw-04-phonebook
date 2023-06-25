@@ -29,8 +29,8 @@ export const Form = ({onSubmit}) => {
     }
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleSubmit = event => {
+    event.preventDefault();
 
     onSubmit({ name, number });
     setName('');

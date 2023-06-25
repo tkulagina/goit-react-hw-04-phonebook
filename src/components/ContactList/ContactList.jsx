@@ -2,9 +2,8 @@ import PropTypes from 'prop-types';
 import {ItemContact} from 'components/ItemContact/ItemContact';
 import css from './ContactList.module.css';
 
-export const ContactList = props => {
-  const { vizibleContacts, onDeleteContact } = props;
-
+export const ContactList = ({ vizibleContacts, onDeleteContact }) => {
+ 
   return (
     <ul className={css.list}>
       {vizibleContacts?.length

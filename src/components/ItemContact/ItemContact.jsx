@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import css from './ItemContact.module.css';
 
-export const ItemContact = props => {
-  const { contact, onDeleteContact } = props;
+export const ItemContact = ({ contact, onDeleteContact }) => {
+  
   return (
     <li className={css.item}>
       <p className={css.text}>
