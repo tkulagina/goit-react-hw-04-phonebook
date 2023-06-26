@@ -2,25 +2,29 @@ import PropTypes from 'prop-types';
 import {ItemContact} from 'components/ItemContact/ItemContact';
 import css from './ContactList.module.css';
 
-export const ContactList = ({ vizibleContacts, onDeleteContact }) => {
- 
+export const ContactList = ({ contactList, onDelete }) => {
   return (
     <ul className={css.list}>
-      {vizibleContacts?.length
-        ? vizibleContacts.map(contact => (
-            <ItemContact
-              key={contact.id}
-              contact={contact}
-              onDeleteContact={onDeleteContact}
-            />
-          ))
-        : ''}
+      {contactList.map(({ id, name, number }) => (
+        <ItemContact
+          key={id}
+          name={name}
+          number={number}
+          onDelete={onDelete}
+          id={id}
+        />
+      ))}
     </ul>
   );
 };
+
 ContactList.propTypes = {
-  vizibleContacts: PropTypes.arrayOf(
-    PropTypes.shape({ id: PropTypes.string.isRequired })
+  onDelete: PropTypes.func.isRequired,
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.number.isRequired,
+    })
   ),
-  onDeleteContact: PropTypes.func.isRequired,
 };

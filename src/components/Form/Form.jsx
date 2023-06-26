@@ -1,82 +1,72 @@
-import {useState} from 'react';
-import shortid from 'shortid';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import shortid from 'shortid';
 import css from './Form.module.css';
 
-export const Form = ({onSubmit}) => {
+export  function Form({ addUserData }) {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState ('');
- 
+  const [number, setNumber] = useState('');
 
-  const nameInputId = shortid.generate();
-  const numberInputId = shortid.generate();
-
-  const handleChange = event => {
-    const { name, value } = event.currentTarget;
-
+  const handleChange = evt => {
+    const { name, value } = evt.target;
     switch (name) {
       case 'name':
-        setName (value);
+        setName(value);
         break;
-
-        case 'number':
-          setNumber (value);
-          break;
-
-          default:
-            return;
+      case 'number':
+        setNumber(value);
+        break;
+      default:
+        return;
     }
   };
 
-  const handleSubmit = event => {
-    event.preventDefault();
-
-    onSubmit({ name, number });
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    const id = shortid.generate();
+    const user = { name, number, id };
+    addUserData(user);
     setName('');
     setNumber('');
   };
-   
-    return (
-      <>
-        <form onSubmit={handleSubmit} className={css.wrapper}>
-          <label htmlFor={nameInputId} className={css.label}>
-            Name
-          </label>
+
+  return (
+    <>
+      <form className={css.wrapper} onSubmit={handleSubmit}>
+        <label className={css.label}>
+          Name
           <input
+            className={css.input}
             type="text"
             name="name"
+            value={name}
+            onChange={handleChange}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
-            value={name}
-            onChange={handleChange}
-            id={nameInputId}
-            className={css.input}
           />
-          <label htmlFor={numberInputId} className={css.label}>
-            Number
-          </label>
+        </label>
+        <label className={css.label}>
+          Number
           <input
+            className={css.input}
             type="tel"
             name="number"
+            value={number}
+            onChange={handleChange}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            value={number}
-            onChange={handleChange}
-            id={numberInputId}
-            className={css.input}
           />
-          <button type="submit" className={css.btn}>
-            Add contact
-          </button>
-        </form>
-      </>
-    );
-  }
+        </label>
+        <button className={css.btn} type="submit">
+          Add contact
+        </button>
+      </form>
+    </>
+  );
+}
 
-
-  Form.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-  };
+Form.propTypes = {
+  addUserData: PropTypes.func.isRequired,
+};

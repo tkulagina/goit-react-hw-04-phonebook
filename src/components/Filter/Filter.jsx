@@ -1,20 +1,22 @@
 import PropTypes from 'prop-types';
-import css from './Filter.module.css';
+import css from '../Form/Form.module.css';
 
-export const Filter = ({ value, onChangeFilter }) => (
-  <div className={css.wrapper}>
-    <label className={css.label}>Find contacts by name</label>
-    <input
-      type="text"
-      name="filter"
-      pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-      className={css.input}
-      value={value}
-      onChange={onChangeFilter}
-    />
-  </div>
-);
+export const Filter = ({ handlerFilter }) => {
+  return (
+    <form className={css.wrapper}>
+      <label className={css.label}>
+        Find Contacts by name
+        <input
+          className={css.input}
+          type="text"
+          name="name"
+          onChange={handlerFilter}
+        />
+      </label>
+    </form>
+  );
+};
+
 Filter.propTypes = {
-  value: PropTypes.string,
-  onChangeFilter: PropTypes.func.isRequired,
+  handlerFilter: PropTypes.func.isRequired,
 };
